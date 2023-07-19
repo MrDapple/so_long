@@ -52,7 +52,7 @@ CFLAGS		?=	-Wall -Wextra -Werror
 OBJCS		:=	$(SRCS:.c=.o)
 BONUSOBJCS	:=	$(BONUSES:.c=.o)
 
-all			:	$(NAME)
+all			:	bonus
 
 $(NAME)		:	$(OBJCS)
 	ar -rcs $(NAME) $(OBJCS)
