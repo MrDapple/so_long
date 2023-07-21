@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/07/19 17:41:01 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/07/21 11:26:36 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,50 +116,52 @@ char	**sl_gentab(char *map)
 	
 // 	while (str[cnt] && str[cnt])
 // }
-int	sl_win_calc(t_vars mlx, char t)
+int	sl_win_calc(t_vars *mlx, char t)
 {
 	int c;
 
 	c = 0;
 	if (t == 'w')
 	{
-		while (mlx.map[0][c])
+		while (mlx->map[0][c])
 			c++;
 		return (c);
 	}
 	if (t == 'h')
 	{
-		while (mlx.map[c])
+		while (mlx->map[c])
 			c++;
 		return (c);
 	}
 	return (0);
 }
 
-int	sl_pos_calc(t_vars mlx, char t, char find)
+int	sl_pos_calc(t_vars *mlx, char t, char find)
 {
 	int c1;
 	int c2;
-	int	win_w = 0;
-	int	win_h = 0;
+	// int	win_w = 0;
+	// int	win_h = 0;
 
-	win_w = sl_win_calc(mlx, 'w');
-	win_h = sl_win_calc(mlx, 'h');
+	// win_w = sl_win_calc(mlx, 'w');
+	// win_h = sl_win_calc(mlx, 'h');
 	c1 = 0;
 	c2 = 0;
-	while (c1 <= mlx.win_h)
+	while (c1 <= mlx->win_h)
 	{
-		if (mlx.map[c1][c2] == find)
+		// ft_printf("checking %c [%d][%d]'%c'\n", t, c1, c2, mlx->map[c1][c2]);
+		if (mlx->map[c1][c2] == find && mlx->map[c1][c2] != '\0')
 		{
+			ft_printf("FOUND [%d][%d]'%c'\n", c1, c2, mlx->map[c1][c2]);
 			if (t == 'w')
-			 	return (c2);
+				return (c1);
 			if (t == 'h')
-			 	return (c1);
+				return (c2);
 		}
-		if (c2 == mlx.win_w)
+		if (c2 == mlx->win_w)
 		{
-			c2 = 0;
 			c1++;
+			c2 = 0;
 		}
 		else
 			c2++;
