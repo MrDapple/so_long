@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/02 14:16:41 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/02 16:15:28 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ typedef struct mlx_vars
 	void	*tex_wall;
 	void	*tex_floor;
 	void	*tex_temp;
-	void	*tex_p_n;
+	void	*tex_p_up;
+	void	*tex_p_down;
+	void	*tex_p_left;
+	void	*tex_p_right;
 	void	*tex_ghost_n;
 	void	*tex_collectible;
 	void	*tex_closed;

@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/02 14:49:34 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/02 16:26:18 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*sl_index(char type, t_vars *mlx)
 	if (type == '0')
 		return (mlx->tex_floor);
 	if (type == 'P')
-		return (mlx->tex_p_n);
+		return (mlx->tex_p_up);
 	if (type == 'C')
 		return (mlx->tex_collectible);
 	if (type == 'E')
@@ -74,16 +74,24 @@ int	sl_settex(t_vars *mlx)
 
 	w = 0;
 	h = 0;
+	mlx->tex_temp = mlx_xpm_file_to_image(mlx->mlx,
+			"images/player_sprites/p_n.xpm", &w, &h);
+	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
+			"images/player_sprites/p_up.xpm", &w, &h);
+	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
+			"images/player_sprites/p_down.xpm", &w, &h);
+	mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
+			"images/player_sprites/p_left.xpm", &w, &h);
+	mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
+			"images/player_sprites/p_right.xpm", &w, &h);
 	mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/blank.xpm", &w, &h);
 	mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/bwtile.xpm", &w, &h);
 	mlx->tex_temp = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/warning.xpm", &w, &h);
-	mlx->tex_p_n = mlx_xpm_file_to_image(mlx->mlx,
-			"images/player_sprites/p_neutral.xpm", &w, &h);
 	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-			"images/collectibles/coin.xpm", &w, &h);
+			"images/enemies/ghost_n.xpm", &w, &h);
 	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/floor_cracked.xpm", &w, &h);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
@@ -115,7 +123,7 @@ int	main(void)
 	sl_map_render(&mlx);
 	mlx.map[mlx.pos_h][mlx.pos_w] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
-	av_print_tab(mlx.map);
+	// av_print_tab(mlx.map);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

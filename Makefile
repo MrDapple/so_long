@@ -16,8 +16,8 @@ all			:	libft mlx $(NAME)
 
 $(NAME)		:	$(OBJCS)
 
-# %.o			:	%.c
-# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+.c.o		:
+	@${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
 
 libft		:
 	@make -C libftprintf
@@ -41,6 +41,6 @@ run			:	all
 	@gcc $(CFLAGS) $(SFLAGS) $(OBJCS) $(MINILIBX) $(LIBPRINT) && ./a.out | cat -e
 	@echo "------------------------------------\n"
 	@echo "cleaning up...\n"
-	@rm -f *.o
+	@rm -f *.o a.out
 
 .PHONY		:	all clean fclean re run
