@@ -1,35 +1,46 @@
-SRCS		:=	testmain.c
+SRCS		:=	SL_utils.c \
+				SL_gentab.c \
+				SL_movement.c \
+				SL_calc.c \
 
-LIBPRINT	:= libft/libft.a \
+LIBPRINT	:= libftprintf/libftprintf.a
 
-NAME		:=	so_long
+MINILIBX	:= minilibx/libmlx.a
+
+NAME		:=	so_long.a
 CFLAGS		?=	-Wall -Wextra -Werror
+SFLAGS		:= -framework OpenGL -framework AppKit
+OBJCS		:=	$(SRCS:.c=.o)
 
-all			:	$(NAME)
+all			:	libft mlx $(NAME)
 
-$(NAME)		:	$(LIBPRINT) $(MLX)
+$(NAME)		:	$(OBJCS)
 
-$(LIBPRINT)	:
-	make -C libftprintf
+# %.o			:	%.c
+# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
-$(MLX)		:
-	make -C minilibx
+libft		:
+	@make -C libftprintf
+
+mlx	:
+	@make -C minilibx
 
 clean		:
-	make clean -C libft
+	@rm -f *.o
+	@make clean -C libftprintf
+	@make clean -C minilibx
 
 fclean		:	clean
-	rm -f $(NAME)
-	make fclean -C libft
+	@make fclean -C libftprintf
+	@rm -f $(NAME) libmlx.a libftprintf.a
 
 re			:	fclean all
 
-run			:
-		@cc $(CFLAGS) -c -o testmain.o testmain.c
-		@echo "\n-------------- RESULT --------------"
-		@gcc -Wall -Wextra -Werror *.o -L. ./libftprintf/libftprintf.a minilibx/mlx.h && time ./a.out | cat -e
-		@echo "------------------------------------\n"
-		@echo "cleaning up...\n"
-		@rm -fr testmain.o
+run			:	all
+	@echo "\n-------------- RESULT --------------"
+	@gcc $(CFLAGS) $(SFLAGS) $(OBJCS) $(MINILIBX) $(LIBPRINT) && ./a.out | cat -e
+	@echo "------------------------------------\n"
+	@echo "cleaning up...\n"
+	@rm -f *.o
 
-.PHONY		:	all clean fclean re
+.PHONY		:	all clean fclean re run

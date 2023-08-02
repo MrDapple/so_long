@@ -6,14 +6,14 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:46:27 by anvoets           #+#    #+#             */
-/*   Updated: 2023/05/11 12:53:08 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/02 13:27:40 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 
 int				ft_printf(const char *format, ...);
