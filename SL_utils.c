@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/02 16:26:18 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/04 16:47:57 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ int	sl_settex(t_vars *mlx)
 	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
 			"images/enemies/ghost_n.xpm", &w, &h);
 	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/floor_cracked.xpm", &w, &h);
+			"images/map_textures/door_closed.xpm", &w, &h);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/open.xpm", &w, &h);
+			"images/map_textures/door_open.xpm", &w, &h);
 	return (0);
 }
 
@@ -109,7 +109,7 @@ int	main(void)
 	win_h = 0;
 	mlx.found = 0;
 	mlx.mlx = mlx_init();
-	mlx.map = sl_gentab("maps/map1.ber");
+	mlx.map = sl_gentab("maps/map3.ber");
 	mlx.win_w = sl_win_calc(&mlx, 'w');
 	mlx.win_h = sl_win_calc(&mlx, 'h');
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * 100, mlx.win_h * 100,
