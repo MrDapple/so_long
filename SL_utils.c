@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/04 16:47:57 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/09 12:20:35 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,25 @@ int	sl_settex(t_vars *mlx)
 	mlx->tex_temp = mlx_xpm_file_to_image(mlx->mlx,
 			"images/player_sprites/p_n.xpm", &w, &h);
 	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
-			"images/player_sprites/p_up.xpm", &w, &h);
+			"images/chars/P_up.xpm", &w, &h);
 	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
-			"images/player_sprites/p_down.xpm", &w, &h);
+			"images/chars/P_down.xpm", &w, &h);
 	mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
-			"images/player_sprites/p_left.xpm", &w, &h);
+			"images/chars/P_left.xpm", &w, &h);
 	mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
-			"images/player_sprites/p_right.xpm", &w, &h);
+			"images/chars/P_right.xpm", &w, &h);
 	mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/blank.xpm", &w, &h);
+			"images/chars/1.xpm", &w, &h);
 	mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/bwtile.xpm", &w, &h);
+			"images/chars/0.xpm", &w, &h);
 	mlx->tex_temp = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/warning.xpm", &w, &h);
 	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-			"images/enemies/ghost_n.xpm", &w, &h);
+			"images/chars/C.xpm", &w, &h);
 	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/door_closed.xpm", &w, &h);
+			"images/chars/E.xpm", &w, &h);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-			"images/map_textures/door_open.xpm", &w, &h);
+			"images/chars/E_lc.xpm", &w, &h);
 	return (0);
 }
 

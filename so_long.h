@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/02 16:15:28 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/09 12:21:17 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
+#define TRAIL mlx->tex_floor
 
 # include "libftprintf/ft_printf.h"
 # include "libftprintf/get_next_line.h"

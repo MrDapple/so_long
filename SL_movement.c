@@ -6,15 +6,13 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/02 16:28:14 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/09 12:20:40 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#ifndef	TRAIL
-# define TRAIL mlx->tex_floor
-#endif
+
 
 int	sl_movement(int keycode, t_vars *mlx)
 {
