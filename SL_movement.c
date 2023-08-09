@@ -6,13 +6,11 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/09 12:20:40 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/09 14:42:58 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 int	sl_movement(int keycode, t_vars *mlx)
 {
@@ -34,30 +32,30 @@ int	sl_movement(int keycode, t_vars *mlx)
 		ft_printf("Steps:%d [%d/%d]\n", steps, mlx->found, mlx->collect);
 	if (mlx->found >= mlx->collect)
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_open,
-			(mlx->pos_w_e) * 100, (mlx->pos_h_e) * 100);
+			(mlx->pos_x_e) * X_WIDTH, (mlx->pos_y_e) * X_HEIGHT);
 	return (0);
 }
 
 int	mv_up(t_vars *mlx)
 {
-	if (mlx->map[mlx->pos_h - 1][mlx->pos_w] != '1')
+	if (mlx->map[mlx->pos_y - 1][mlx->pos_x] != '1')
 	{
-		if (mlx->map[mlx->pos_h - 1][mlx->pos_w] == 'E')
+		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
 				exit (3);
 			else
 				return (0);
 		}
-		if (mlx->map[mlx->pos_h - 1][mlx->pos_w] == 'C')
+		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'C')
 		{
-			mlx->map[mlx->pos_h - 1][mlx->pos_w] = '0';
+			mlx->map[mlx->pos_y - 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_w) * 100, (mlx->pos_h--) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y--) * X_HEIGHT);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_up,
-			(mlx->pos_w) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		return (1);
 	}
 	return (0);
@@ -65,24 +63,24 @@ int	mv_up(t_vars *mlx)
 
 int	mv_down(t_vars *mlx)
 {
-	if (mlx->map[mlx->pos_h + 1][mlx->pos_w] != '1')
+	if (mlx->map[mlx->pos_y + 1][mlx->pos_x] != '1')
 	{
-		if (mlx->map[mlx->pos_h + 1][mlx->pos_w] == 'E')
+		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
 				exit (3);
 			else
 				return (0);
 		}
-		if (mlx->map[mlx->pos_h + 1][mlx->pos_w] == 'C')
+		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'C')
 		{
-			mlx->map[mlx->pos_h + 1][mlx->pos_w] = '0';
+			mlx->map[mlx->pos_y + 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_w) * 100, (mlx->pos_h++) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y++) * X_HEIGHT);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_down,
-			(mlx->pos_w) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		return (1);
 	}
 	return (0);
@@ -90,24 +88,24 @@ int	mv_down(t_vars *mlx)
 
 int	mv_left(t_vars *mlx)
 {
-	if (mlx->map[mlx->pos_h][mlx->pos_w - 1] != '1')
+	if (mlx->map[mlx->pos_y][mlx->pos_x - 1] != '1')
 	{
-		if (mlx->map[mlx->pos_h][mlx->pos_w - 1] == 'E')
+		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
 				exit (3);
 			else
 				return (0);
 		}
-		if (mlx->map[mlx->pos_h][mlx->pos_w - 1] == 'C')
+		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'C')
 		{
-			mlx->map[mlx->pos_h][mlx->pos_w - 1] = '0';
+			mlx->map[mlx->pos_y][mlx->pos_x - 1] = '0';
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_w--) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x--) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_left,
-			(mlx->pos_w) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		return (1);
 	}
 	return (0);
@@ -115,24 +113,24 @@ int	mv_left(t_vars *mlx)
 
 int	mv_right(t_vars *mlx)
 {
-	if (mlx->map[mlx->pos_h][mlx->pos_w + 1] != '1')
+	if (mlx->map[mlx->pos_y][mlx->pos_x + 1] != '1')
 	{
-		if (mlx->map[mlx->pos_h][mlx->pos_w + 1] == 'E')
+		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
 				exit (3);
 			else
 				return (0);
 		}
-		if (mlx->map[mlx->pos_h][mlx->pos_w + 1] == 'C')
+		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'C')
 		{
-			mlx->map[mlx->pos_h][mlx->pos_w + 1] = '0';
+			mlx->map[mlx->pos_y][mlx->pos_x + 1] = '0';
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_w++) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x++) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_right,
-			(mlx->pos_w) * 100, (mlx->pos_h) * 100);
+			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
 		return (1);
 	}
 	return (0);

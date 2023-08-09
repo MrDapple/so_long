@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/09 12:21:17 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/09 14:40:15 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # endif
 
 #define TRAIL mlx->tex_floor
+#define X_WIDTH 110
+#define X_HEIGHT 110
 
 # include "libftprintf/ft_printf.h"
 # include "libftprintf/get_next_line.h"
@@ -45,10 +47,10 @@ typedef struct mlx_vars
 	char	**map;
 	int		found;
 	int		collect;
-	int		pos_w;
-	int		pos_h;
-	int		pos_w_e;
-	int		pos_h_e;
+	int		pos_x;
+	int		pos_y;
+	int		pos_x_e;
+	int		pos_y_e;
 }			t_vars;
 
 typedef struct player_pos
@@ -73,5 +75,7 @@ int			mv_left(t_vars *mlx);
 int			mv_right(t_vars *mlx);
 int			sl_collect_calc(t_vars *mlx, char find);
 int			sl_settex(t_vars *mlx);
+int			sl_is_possible(t_vars *mlx);
+int			sl_free_stop(t_vars *mlx);
 
 #endif

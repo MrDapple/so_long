@@ -2,6 +2,7 @@ SRCS		:=	SL_utils.c \
 				SL_gentab.c \
 				SL_movement.c \
 				SL_calc.c \
+				SL_checkmap.c \
 
 LIBPRINT	:= libftprintf/libftprintf.a
 
