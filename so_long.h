@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/09 14:40:15 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:28:52 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 #  define BUFFER_SIZE 10
 # endif
 
-#define TRAIL mlx->tex_floor
-#define X_WIDTH 110
-#define X_HEIGHT 110
+#define TRAIL mlx->tex_trail
+#define X_WIDTH 100
+#define X_HEIGHT 100
+#define LIMIT 50
 
 # include "libftprintf/ft_printf.h"
 # include "libftprintf/get_next_line.h"
@@ -44,6 +45,7 @@ typedef struct mlx_vars
 	void	*tex_collectible;
 	void	*tex_closed;
 	void	*tex_open;
+	void	*tex_trail;
 	char	**map;
 	int		found;
 	int		collect;
@@ -53,11 +55,13 @@ typedef struct mlx_vars
 	int		pos_y_e;
 }			t_vars;
 
-typedef struct player_pos
+typedef struct checkmapvars
 {
-	int		x;
-	int		y;
-}			t_p_pos;
+	int	x;
+	int	y;
+	int	c;
+	int	e;
+}			t_mapvars;
 
 int			sl_movement(int keycode, t_vars *mlx);
 char		**sl_gentab(char *map);
@@ -75,7 +79,12 @@ int			mv_left(t_vars *mlx);
 int			mv_right(t_vars *mlx);
 int			sl_collect_calc(t_vars *mlx, char find);
 int			sl_settex(t_vars *mlx);
-int			sl_is_possible(t_vars *mlx);
+int			sl_is_possible(char **map, int y, int x, int collect);
 int			sl_free_stop(t_vars *mlx);
+char		sl_swap(char **map, int y, int x);
+int			sl_iswalk(char c, char *lst);
+int			sl_calcopt(char **map, int y, int x);
+int			sl_reset_tab(char **map);
+int			sl_check(char **map, int y, int x, char c);
 
 #endif
