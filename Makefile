@@ -10,7 +10,7 @@ MINILIBX	:= minilibx/libmlx.a
 
 NAME		:=	so_long.a
 CFLAGS		?=	-Wall -Wextra -Werror
-SFLAGS		:= -framework OpenGL -framework AppKit
+SFLAGS		:= -framework OpenGL -framework AppKit 
 OBJCS		:=	$(SRCS:.c=.o)
 
 all			:	libft mlx $(NAME)

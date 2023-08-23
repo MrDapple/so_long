@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/21 15:31:54 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/23 15:42:41 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ int	sl_movement(int keycode, t_vars *mlx)
 	int			c;
 
 	c = steps;
-	// av_print_tab(mlx->map);
-	// ft_printf("%d\n", keycode);
-	if (keycode == 35)
-		sl_is_possible(mlx->map, mlx->pos_y, mlx->pos_x, mlx->collect);
 	if (keycode == 53)
 		exit(3);
 	else if (keycode == 126)

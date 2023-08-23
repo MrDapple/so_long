@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/21 16:26:32 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/23 15:45:06 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	sl_settex(t_vars *mlx)
 	h = 0;
 	mlx->tex_temp = mlx_xpm_file_to_image(mlx->mlx,
 			"images/map_textures/warning.xpm", &w, &h);
-
 	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
 			"images/programmer/blue_up.xpm", &w, &h);
 	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
@@ -74,7 +73,6 @@ int	sl_settex(t_vars *mlx)
 			"images/programmer/red.xpm", &w, &h);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
 			"images/programmer/green.xpm", &w, &h);
-
 	// mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
 	// 		"images/chars/P_up.xpm", &w, &h);
 	// mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
@@ -95,6 +93,7 @@ int	sl_settex(t_vars *mlx)
 	// 		"images/chars/E.xpm", &w, &h);
 	// mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
 	// 		"images/chars/E_lc.xpm", &w, &h);
+
 	return (0);
 }
 
@@ -139,23 +138,26 @@ int	main(void)
 	win_h = 0;
 	mlx.found = 0;
 	mlx.mlx = mlx_init();
-	mlx.map = sl_gentab("maps/map3.ber");
+	mlx.map = sl_gentab(CARTE);
 	mlx.win_w = sl_win_calc(&mlx, 'w');
 	mlx.win_h = sl_win_calc(&mlx, 'h');
-	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_WIDTH, mlx.win_h * X_HEIGHT,
-			"so_long");
-	sl_settex(&mlx);
 	mlx.pos_x = sl_pos_calc(&mlx, 'x', 'P');
 	mlx.pos_y = sl_pos_calc(&mlx, 'y', 'P');
 	mlx.pos_x_e = sl_pos_calc(&mlx, 'x', 'E');
 	mlx.pos_y_e = sl_pos_calc(&mlx, 'y', 'E');
-	// if (sl_is_possible(&mlx) == -1)
+	mlx.t_map = sl_gentab(CARTE);
 	// 	return(sl_free_stop(&mlx));
 	sl_collect_calc(&mlx, 'C');
+	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
+	if (mlx.coll_check != mlx.collect || mlx.exit_check != 1)
+		return (ft_printf("error\n"));
+	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_WIDTH, mlx.win_h * X_HEIGHT,
+			"so_long");
+	sl_settex(&mlx);
 	sl_map_render(&mlx);
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
-	// av_print_tab(mlx.map);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
+
