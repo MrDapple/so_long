@@ -1,8 +1,8 @@
 SRCS		:=	SL_utils.c \
+				SL_utils_2.c \
 				SL_gentab.c \
 				SL_movement.c \
 				SL_calc.c \
-				SL_checkmap.c \
 
 LIBPRINT	:= libftprintf/libftprintf.a
 
@@ -10,7 +10,7 @@ MINILIBX	:= minilibx/libmlx.a
 
 NAME		:=	so_long.a
 CFLAGS		?=	-Wall -Wextra -Werror
-SFLAGS		:= -framework OpenGL -framework AppKit 
+SFLAGS		:= -framework OpenGL -framework AppKit -fsanitize=address
 OBJCS		:=	$(SRCS:.c=.o)
 
 all			:	libft mlx $(NAME)

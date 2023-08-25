@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/23 15:42:41 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:14:17 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	sl_movement(int keycode, t_vars *mlx)
 
 	c = steps;
 	if (keycode == 53)
-		exit(3);
+	{
+		sl_free_stop(mlx, 0);
+	}
 	else if (keycode == 126)
 		steps += mv_up(mlx);
 	else if (keycode == 125)
@@ -32,7 +34,7 @@ int	sl_movement(int keycode, t_vars *mlx)
 		ft_printf("Steps:%d [%d/%d]\n", steps, mlx->found, mlx->collect);
 	if (mlx->found >= mlx->collect)
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_open,
-			(mlx->pos_x_e) * X_WIDTH, (mlx->pos_y_e) * X_HEIGHT);
+			(mlx->pos_x_e) * X_W, (mlx->pos_y_e) * X_H);
 	return (0);
 }
 
@@ -43,7 +45,7 @@ int	mv_up(t_vars *mlx)
 		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				exit (3);
+				sl_free_stop(mlx, 0);
 			else
 				return (0);
 		}
@@ -53,9 +55,9 @@ int	mv_up(t_vars *mlx)
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y--) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y--) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_up,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
 	}
 	return (0);
@@ -68,7 +70,7 @@ int	mv_down(t_vars *mlx)
 		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				exit (3);
+				sl_free_stop(mlx, 0);
 			else
 				return (0);
 		}
@@ -78,9 +80,9 @@ int	mv_down(t_vars *mlx)
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y++) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y++) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_down,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
 	}
 	return (0);
@@ -93,7 +95,7 @@ int	mv_left(t_vars *mlx)
 		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				exit (3);
+				sl_free_stop(mlx, 0);
 			else
 				return (0);
 		}
@@ -103,9 +105,9 @@ int	mv_left(t_vars *mlx)
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_x--) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x--) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_left,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
 	}
 	return (0);
@@ -118,7 +120,7 @@ int	mv_right(t_vars *mlx)
 		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				exit (3);
+				sl_free_stop(mlx, 0);
 			else
 				return (0);
 		}
@@ -128,9 +130,9 @@ int	mv_right(t_vars *mlx)
 			mlx->found++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
-			(mlx->pos_x++) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x++) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_right,
-			(mlx->pos_x) * X_WIDTH, (mlx->pos_y) * X_HEIGHT);
+			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
 	}
 	return (0);
