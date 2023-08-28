@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/25 14:13:47 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:14:49 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
+// free map and t_map and ... (because they're malloc'd)
+// destroy all image textures (act as image free)
 typedef struct	mlx_vars
 {
 	void		*win;
@@ -58,15 +60,6 @@ typedef struct	mlx_vars
 	int			pos_x_e;
 	int			pos_y_e;
 }				t_vars;
-
-struct			node
-{
-	long		steps;
-	int			x;
-	int			y;
-	struct node	*prev;
-	struct node	*next;
-};
 
 int				sl_movement(int keycode, t_vars *mlx);
 char			**sl_gentab(char *map);

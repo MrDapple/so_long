@@ -44,4 +44,4 @@ run			:	all
 	@echo "cleaning up...\n"
 	@rm -f *.o a.out
 
-.PHONY		:	all clean fclean re run
+.PHONY		:	all clean fclean re libft mlx run

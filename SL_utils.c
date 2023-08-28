@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/25 13:55:45 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/08/28 09:32:18 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,47 +47,47 @@ int	sl_settex(t_vars *mlx)
 	int	x;
 
 	x = 0;
-	// mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/P_up.xpm", &x, &x);
-	// mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/P_down.xpm", &x, &x);
-	// mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/P_left.xpm", &x, &x);
-	// mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/P_right.xpm", &x, &x);
-	// mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/1.xpm", &x, &x);
-	// mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/0.xpm", &x, &x);
-	// mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/0.xpm", &x, &x);
-	// mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/C.xpm", &x, &x);
-	// mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/E.xpm", &x, &x);
-	// mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/chars/E_lc.xpm", &x, &x);
-
 	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/blue_up.xpm", &x, &x);
+			"images/chars/P_up.xpm", &x, &x);
 	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/blue_down.xpm", &x, &x);
+			"images/chars/P_down.xpm", &x, &x);
 	mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/blue_left.xpm", &x, &x);
+			"images/chars/P_left.xpm", &x, &x);
 	mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/blue_right.xpm", &x, &x);
+			"images/chars/P_right.xpm", &x, &x);
 	mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/grey.xpm", &x, &x);
+			"images/chars/1.xpm", &x, &x);
 	mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/white.xpm", &x, &x);
+			"images/chars/0.xpm", &x, &x);
 	mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/blue.xpm", &x, &x);
+			"images/chars/0.xpm", &x, &x);
 	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/yellow.xpm", &x, &x);
+			"images/chars/C.xpm", &x, &x);
 	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/red.xpm", &x, &x);
+			"images/chars/E.xpm", &x, &x);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-			"images/programmer/green.xpm", &x, &x);
+			"images/chars/E_lc.xpm", &x, &x);
+
+	// mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/blue_up.xpm", &x, &x);
+	// mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/blue_down.xpm", &x, &x);
+	// mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/blue_left.xpm", &x, &x);
+	// mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/blue_right.xpm", &x, &x);
+	// mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/grey.xpm", &x, &x);
+	// mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/white.xpm", &x, &x);
+	// mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/blue.xpm", &x, &x);
+	// mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/yellow.xpm", &x, &x);
+	// mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/red.xpm", &x, &x);
+	// mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
+	// 		"images/programmer/green.xpm", &x, &x);
 	return (0);
 }
 
