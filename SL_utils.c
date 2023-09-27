@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:48:11 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:36:27 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	so_long(char *map)
 		return (ft_printf("error: 1\n"));
 	sl_collect_calc(&mlx, 'C');
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
-	if (mlx.coll_check != mlx.collect || mlx.exit_check != 1)
+	if (mlx.collect <= 0 || mlx.exit_check != 1)
 		return (ft_printf("error: 2\n"));
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_W, mlx.win_h * X_H,
 			"so_long");
