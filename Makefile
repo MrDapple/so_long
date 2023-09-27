@@ -32,11 +32,11 @@ libft		:
 	@make -C libftprintf
 
 clean		:
-	@rm -f *.o $(NAME)
+	@rm -f $(OBJCS) $(NAME)
 
 fclean		:	clean
 	make fclean -C libftprintf
-	rm -f $(NAME) $(LIBPRINT)
+	rm -f $(LIBPRINT)
 
 re			:	fclean all
 
