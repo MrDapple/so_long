@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:18:30 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:36:04 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define X_W		100
 # define X_H		100
 # define LIMIT		50
-# define CARTE		"maps/map1.ber"
 
 # include "libftprintf/ft_printf.h"
 # include "libftprintf/get_next_line.h"
@@ -61,7 +60,7 @@ typedef struct	mlx_vars
 	int			pos_y_e;
 }				t_vars;
 
-int				so_long(void);
+int				so_long(char *map);
 int				sl_movement(int keycode, t_vars *mlx);
 char			**sl_gentab(char *map);
 int				sl_checkmap(int fd, int w, int h);
@@ -82,6 +81,6 @@ int				sl_is_possible(char **map, int y, int x, t_vars *mlx);
 int				sl_free_stop(t_vars *mlx, int errorcode);
 int				sl_destroy_img(t_vars *mlx);
 int				sl_check(char **map, int y, int x, char c);
-int				sl_set_vars(t_vars *mlx);
+int				sl_set_vars(t_vars *mlx, char *map);
 
 #endif

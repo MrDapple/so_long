@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/23 15:51:37 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:47:02 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ char	**sl_gentab(char *map)
 	int		total;
 
 	total = 0;
-	fd = open(map, O_RDONLY);
+	fd = open(map , O_RDONLY);
 	while (read(fd, &buff, 1))
 		total++;
 	close(fd);
 	res = malloc(sizeof(char) * (total + 1));
+	// if (!res)
 	res[total] = '\0';
-	fd = open(map, O_RDONLY);
+	fd = open(map , O_RDONLY);
 	read(fd, res, total);
 	tab = ft_split(res, '\n');
 	free(res);

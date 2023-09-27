@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:17:44 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:48:11 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,6 @@ int	sl_settex(t_vars *mlx)
 			"images/chars/E.xpm", &x, &x);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
 			"images/chars/E_lc.xpm", &x, &x);
-
-	// mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/blue_up.xpm", &x, &x);
-	// mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/blue_down.xpm", &x, &x);
-	// mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/blue_left.xpm", &x, &x);
-	// mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/blue_right.xpm", &x, &x);
-	// mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/grey.xpm", &x, &x);
-	// mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/white.xpm", &x, &x);
-	// mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/blue.xpm", &x, &x);
-	// mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/yellow.xpm", &x, &x);
-	// mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/red.xpm", &x, &x);
-	// mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-	// 		"images/programmer/green.xpm", &x, &x);
 	return (0);
 }
 
@@ -115,7 +94,7 @@ int	sl_map_render(t_vars *mlx)
 	return (0);
 }
 
-int	so_long()
+int	so_long(char *map)
 {
 	t_vars	mlx;
 	int		win_w;
@@ -125,12 +104,12 @@ int	so_long()
 	win_h = 0;
 	mlx.found = 0;
 	mlx.mlx = mlx_init();
-	if (sl_set_vars(&mlx) == 0)
-		return (ft_printf("error\n"));
+	if (sl_set_vars(&mlx, map) == 0)
+		return (ft_printf("error: 1\n"));
 	sl_collect_calc(&mlx, 'C');
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
 	if (mlx.coll_check != mlx.collect || mlx.exit_check != 1)
-		return (ft_printf("error\n"));
+		return (ft_printf("error: 2\n"));
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_W, mlx.win_h * X_H,
 			"so_long");
 	sl_settex(&mlx);
@@ -141,8 +120,9 @@ int	so_long()
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	so_long();
+	if (argc == 2 && argv[1])
+		so_long(argv[1]);
 	return(0);
 }

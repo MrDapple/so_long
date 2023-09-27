@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/08/25 14:22:20 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 12:47:56 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	sl_free_stop(t_vars *mlx, int errorcode)
 	// 	mlx_destroy_window(mlx->mlx, mlx->win);
 	// }
 	if (errorcode == 1)
-		ft_printf("error\n");
+		ft_printf("error STOP\n");
 	exit(3);
 	return (0);
 }
@@ -92,12 +92,12 @@ int	sl_destroy_img(t_vars *mlx)
 	return (1);
 }
 
-int	sl_set_vars(t_vars *mlx)
+int	sl_set_vars(t_vars *mlx, char *map)
 {
-	mlx->map = sl_gentab(CARTE);
+	mlx->map = sl_gentab(map);
 	if (!mlx->map)
 		return (sl_free_stop(mlx, 1));
-	mlx->t_map = sl_gentab(CARTE);
+	mlx->t_map = sl_gentab(map);
 	if (!mlx->t_map)
 		return (sl_free_stop(mlx, 1));
 	mlx->win_w = sl_win_calc(mlx, 'w');
