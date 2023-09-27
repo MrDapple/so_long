@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 14:36:27 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:37:57 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	sl_settex(t_vars *mlx)
 	return (0);
 }
 
-
 int	sl_map_render(t_vars *mlx)
 {
 	int		h;
@@ -94,7 +93,7 @@ int	sl_map_render(t_vars *mlx)
 	return (0);
 }
 
-int	so_long(char *map)
+int	main(int argc, char **argv)
 {
 	t_vars	mlx;
 	int		win_w;
@@ -102,9 +101,11 @@ int	so_long(char *map)
 
 	win_w = 0;
 	win_h = 0;
+	if (argc != 2 || !argv[1])
+		return (ft_printf("error: 0\n"));
 	mlx.found = 0;
 	mlx.mlx = mlx_init();
-	if (sl_set_vars(&mlx, map) == 0)
+	if (sl_set_vars(&mlx, argv[1]) == 0)
 		return (ft_printf("error: 1\n"));
 	sl_collect_calc(&mlx, 'C');
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
@@ -118,11 +119,4 @@ int	so_long(char *map)
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc == 2 && argv[1])
-		so_long(argv[1]);
-	return(0);
 }

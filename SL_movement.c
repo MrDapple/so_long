@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:28:38 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:40:46 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	mv_up(t_vars *mlx)
 			mlx->map[mlx->pos_y - 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
 			(mlx->pos_x) * X_W, (mlx->pos_y--) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_up,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
@@ -79,7 +79,7 @@ int	mv_down(t_vars *mlx)
 			mlx->map[mlx->pos_y + 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
 			(mlx->pos_x) * X_W, (mlx->pos_y++) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_down,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
@@ -104,7 +104,7 @@ int	mv_left(t_vars *mlx)
 			mlx->map[mlx->pos_y][mlx->pos_x - 1] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
 			(mlx->pos_x--) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_left,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
@@ -129,7 +129,7 @@ int	mv_right(t_vars *mlx)
 			mlx->map[mlx->pos_y][mlx->pos_x + 1] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, TRAIL,
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
 			(mlx->pos_x++) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_right,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);

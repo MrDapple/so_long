@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:47:56 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:38:33 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,7 @@ int	sl_free_stop(t_vars *mlx, int errorcode)
 
 	i = 0;
 	if (mlx)
-	// {
-	// // sl_destroy_img(mlx);
-	// if (mlx->map)
-	// {
-	// 	while (mlx->map[i])
-	// 		free(mlx->map[i++]);
-	// 	free(mlx->map);
-	// }
-	i = 0;
-	// if (mlx->t_map)
-	// {
-	// 	while (mlx->t_map[i])
-	// 		free(mlx->map[i++]);
-	// 	free(mlx->t_map);
-	// }
-	// if (mlx->win)
-	// 	mlx_destroy_window(mlx->mlx, mlx->win);
-	// }
+		i = 0;
 	if (errorcode == 1)
 		ft_printf("error STOP\n");
 	exit(3);

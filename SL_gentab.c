@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 12:47:02 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:41:43 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,21 @@ int	sl_checkmap(int fd, int w, int h)
 char	**sl_gentab(char *map)
 {
 	char	**tab;
-	char	buff[2] = "";
+	char	buff[2];
 	char	*res;
 	int		fd;
 	int		total;
 
 	total = 0;
-	fd = open(map , O_RDONLY);
+	fd = open(map, O_RDONLY);
 	while (read(fd, &buff, 1))
 		total++;
 	close(fd);
 	res = malloc(sizeof(char) * (total + 1));
-	// if (!res)
+	if (!res)
+		return (0);
 	res[total] = '\0';
-	fd = open(map , O_RDONLY);
+	fd = open(map, O_RDONLY);
 	read(fd, res, total);
 	tab = ft_split(res, '\n');
 	free(res);
