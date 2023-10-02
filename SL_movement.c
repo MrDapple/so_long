@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 14:07:47 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:38:53 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	sl_movement(int keycode, t_vars *mlx)
 	c = steps;
 	if (keycode == 53)
 	{
-		sl_free_stop(mlx, 0);
+		sl_free_stop(mlx, 4);
 	}
 	else if (keycode == 126)
 		steps += mv_up(mlx);

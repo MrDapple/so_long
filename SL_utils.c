@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 16:02:01 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:38:29 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ int	sl_free_stop(t_vars *mlx, int errorcode)
 	int	i;
 
 	i = 0;
-	if (errorcode >= 3)
+	if (errorcode == 4)
 	{
 		sl_destroy_img(mlx);
+		free(mlx->map);
+		free(mlx->t_map);
+		exit(3);
+		return (0);
 	}
+	if (errorcode >= 3)
+		sl_destroy_img(mlx);
 	if (errorcode >= 2)
 	{
 		free(mlx->map);
@@ -94,6 +100,6 @@ int	main(int argc, char **argv)
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
 	mlx_loop(mlx.mlx);
-	sl_free_stop(&mlx, 0);
+	sl_free_stop(&mlx, 4);
 	return (0);
 }
