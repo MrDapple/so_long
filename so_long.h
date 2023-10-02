@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 12:17:31 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:08:17 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int			mv_left(t_vars *mlx);
 int			mv_right(t_vars *mlx);
 
 //	CALCULATIONS
-int			sl_line_len(char *line, char c, char f);
 int			sl_win_calc(t_vars *mlx, char t);
 int			sl_pos_calc(t_vars *mlx, char t, char find);
 int			sl_strlen(char *str);
@@ -95,8 +94,10 @@ int			sl_find_calc(t_vars *mlx, char find);
 //	CHECKERS
 int			sl_is_possible(char **map, int y, int x, t_vars *mlx);
 int			sl_check(char **map, int y, int x, char c);
-int			sl_checkmap(int fd, int w, int h);
+int			sl_checkmap(char **map);
 int			sl_checktex(t_vars *mlx);
+int			sl_check_tb(char **map, int x);
+int			sl_check_val(char check, char *lst);
 
 //	FREE / SECURITY
 int			sl_free_stop(t_vars *mlx, int errorcode);

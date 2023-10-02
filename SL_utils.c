@@ -6,35 +6,30 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 13:48:57 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:02:01 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	sl_checktex(t_vars *mlx)
+int	sl_free_stop(t_vars *mlx, int errorcode)
 {
-	if (!mlx->tex_p_up)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_p_down)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_p_left)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_p_right)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_wall)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_floor)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_trail)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_collectible)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_closed)
-		sl_free_stop(mlx, 1);
-	if (!mlx->tex_open)
-		sl_free_stop(mlx, 1);
-	return (1);
+	int	i;
+
+	i = 0;
+	if (errorcode >= 3)
+	{
+		sl_destroy_img(mlx);
+	}
+	if (errorcode >= 2)
+	{
+		free(mlx->map);
+		free(mlx->t_map);
+	}
+	if (errorcode >= 1)
+		ft_printf("error\n");
+	exit(3);
+	return (0);
 }
 
 char	*sl_index(char type, t_vars *mlx)
@@ -50,34 +45,6 @@ char	*sl_index(char type, t_vars *mlx)
 	if (type == 'E')
 		return (mlx->tex_closed);
 	return (0);
-}
-
-int	sl_settex(t_vars *mlx)
-{
-	int	x;
-
-	x = 0;
-	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/P_up.xpm", &x, &x);
-	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/P_down.xpm", &x, &x);
-	mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/P_left.xpm", &x, &x);
-	mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/P_right.xpm", &x, &x);
-	mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/1.xpm", &x, &x);
-	mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/0.xpm", &x, &x);
-	mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/0.xpm", &x, &x);
-	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/C.xpm", &x, &x);
-	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/E.xpm", &x, &x);
-	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
-			"images/chars/E_lc.xpm", &x, &x);
-	return (sl_checktex(mlx));
 }
 
 int	sl_map_render(t_vars *mlx)
@@ -113,16 +80,16 @@ int	main(int argc, char **argv)
 	win_h = 0;
 	if (argc != 2 || !argv[1])
 		return (ft_printf("error\n"));
-	if (sl_set_vars(&mlx, argv[1]) == 0)
-		return (ft_printf("error\n"));
+	sl_set_vars(&mlx, argv[1]);
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
 	if (mlx.collect < 1 || mlx.player != 1 || mlx.exit != 1
 		|| mlx.exit_check != 1 || mlx.coll_check < mlx.collect)
-		return (ft_printf("error\n"));
+		return (sl_free_stop(&mlx, 2));
 	mlx.mlx = mlx_init();
+	if (sl_settex(&mlx) == 0)
+		return (sl_free_stop(&mlx, 3));
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_W, mlx.win_h * X_H,
 			"so_long");
-	sl_settex(&mlx);
 	sl_map_render(&mlx);
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);

@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 14:07:48 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:01:09 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,57 @@ int	sl_is_possible(char **map, int y, int x, t_vars *mlx)
 	return (1);
 }
 
-int	sl_free_stop(t_vars *mlx, int errorcode)
+int	sl_settex(t_vars *mlx)
 {
-	int	i;
+	int	x;
 
-	i = 0;
-	sl_destroy_img(mlx);
-	free(mlx->map);
-	free(mlx->t_map);
-	free(mlx->win);
-	free(mlx->mlx);
-	if (errorcode == 1)
-		ft_printf("error\n");
-	exit(3);
-	return (0);
+	x = 0;
+	mlx->tex_p_up = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/P_up.xpm", &x, &x);
+	mlx->tex_p_down = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/P_down.xpm", &x, &x);
+	mlx->tex_p_left = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/P_left.xpm", &x, &x);
+	mlx->tex_p_right = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/P_right.xpm", &x, &x);
+	mlx->tex_wall = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/1.xpm", &x, &x);
+	mlx->tex_floor = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/0.xpm", &x, &x);
+	mlx->tex_trail = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/0.xpm", &x, &x);
+	mlx->tex_collectible = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/C.xpm", &x, &x);
+	mlx->tex_closed = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/E.xpm", &x, &x);
+	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
+			"images/chars/E_lc.xpm", &x, &x);
+	return (sl_checktex(mlx));
+}
+
+int	sl_checktex(t_vars *mlx)
+{
+	if (!mlx->tex_p_up)
+		return (0);
+	else if (!mlx->tex_p_down)
+		return (0);
+	else if (!mlx->tex_p_left)
+		return (0);
+	else if (!mlx->tex_p_right)
+		return (0);
+	else if (!mlx->tex_wall)
+		return (0);
+	else if (!mlx->tex_floor)
+		return (0);
+	else if (!mlx->tex_trail)
+		return (0);
+	else if (!mlx->tex_collectible)
+		return (0);
+	else if (!mlx->tex_closed)
+		return (0);
+	else if (!mlx->tex_open)
+		return (0);
+	return (1);
 }
 
 int	sl_destroy_img(t_vars *mlx)
@@ -72,17 +109,17 @@ int	sl_destroy_img(t_vars *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->tex_closed);
 	if (mlx->tex_open)
 		mlx_destroy_image(mlx->mlx, mlx->tex_open);
-	return (1);
+	return (0);
 }
 
 int	sl_set_vars(t_vars *mlx, char *map)
 {
 	mlx->map = sl_gentab(map);
 	if (!mlx->map)
-		return (0);
+		return (sl_free_stop(mlx, 1));
 	mlx->t_map = sl_gentab(map);
 	if (!mlx->t_map)
-		return (0);
+		return (sl_free_stop(mlx, 1));
 	mlx->win_w = sl_win_calc(mlx, 'w');
 	mlx->win_h = sl_win_calc(mlx, 'h');
 	sl_collect_calc(mlx, 'C');
@@ -90,8 +127,6 @@ int	sl_set_vars(t_vars *mlx, char *map)
 	sl_find_calc(mlx, 'P');
 	mlx->exit = 0;
 	sl_find_calc(mlx, 'E');
-	if (mlx->exit == 0 || mlx->player == 0 || mlx->collect < 1)
-		return (0);
 	mlx->pos_x = sl_pos_calc(mlx, 'x', 'P');
 	mlx->pos_y = sl_pos_calc(mlx, 'y', 'P');
 	mlx->pos_x_e = sl_pos_calc(mlx, 'x', 'E');

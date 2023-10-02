@@ -6,35 +6,53 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 11:47:02 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:26:49 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	sl_checkmap(int fd, int w, int h)
+int	sl_checkmap(char **map)
 {
-	int		cnt;
-	char	*line;
-	int		comp;
+	int	c1;
+	int	c2;
+	int	x;
 
-	w = 0;
-	h = 1;
-	comp = 0;
-	cnt = 0;
-	line = get_next_line(fd);
-	w = sl_line_len(line, '\n', '1');
-	h++;
-	line = get_next_line(fd);
-	while (av_check_nl(line) == YES && (line[0] == '1' && line[w - 1] == '1'))
-	{
-		line = get_next_line(fd);
-		comp = sl_line_len(line, '\n', '1');
-		h++;
-	}
-	if (comp != w)
+	c1 = 0;
+	c2 = -1;
+	x = sl_strlen(map[c1]);
+	if (sl_check_tb(map, x) == 0)
 		return (0);
-	return (h);
+	c2 = 0;
+	while (map[++c1])
+	{
+		if (map[c1][c2] != '1')
+			return (0);
+		while (map[c1][c2])
+		{
+			if (sl_check_val(map[c1][c2], "10CEP") == 0)
+				return (0);
+			c2++;
+		}
+		if (c2 != x || map[c1][x - 1] != '1')
+			return (0);
+		c2 = 0;
+	}
+	return (1);
+}
+
+int	sl_check_val(char check, char *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst[i])
+	{
+		if (lst[i] == check && lst)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 char	**sl_gentab(char *map)
@@ -59,21 +77,35 @@ char	**sl_gentab(char *map)
 	tab = ft_split(res, '\n');
 	free(res);
 	close(fd);
-	return (tab);
+	if (sl_checkmap(tab) == 1)
+		return (tab);
+	free(tab);
+	return (0);
 }
 
-int	sl_line_len(char *line, char c, char f)
+int	sl_check_tb(char **map, int x)
 {
-	int	cnt;
+	int	c1;
+	int	c2;
+	int	c3;
 
-	cnt = 0;
-	while (line[cnt] && line[cnt] != c)
+	c1 = 0;
+	c2 = 0;
+	c3 = 0;
+	while (map[c1][c2] == '1')
+		c2++;
+	if (c2 != x)
+		return (0);
+	c2 = 0;
+	while (map[c1])
 	{
-		if (line[cnt] != f)
-			return (0);
-		cnt++;
+		c1++;
 	}
-	return (cnt);
+	while (map[c1 - 1][c2] == '1')
+		c2++;
+	if (c2 != x)
+		return (0);
+	return (1);
 }
 
 int	sl_strlen(char *str)
