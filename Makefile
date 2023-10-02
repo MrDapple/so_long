@@ -23,7 +23,7 @@ SFLAGS		:=	-framework OpenGL -framework AppKit
 all			:	libft $(NAME)
 
 $(NAME)		:	$(OBJCS)
-	$(CC) $(OBJCS) $(LIBPRINT) -lmlx $(SFLAGS) -o $(NAME)
+	$(CC) $(OBJCS) $(LIBPRINT) -lmlx $(CFLAGS) $(SFLAGS) -o $(NAME)
 
 %.o			:	%.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@

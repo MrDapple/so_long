@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 17:50:08 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 12:17:31 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ typedef struct mlx_vars
 	char	**map;
 	char	**t_map;
 	int		found;
+	int		player;
 	int		collect;
+	int		exit;
 	int		coll_check;
 	int		exit_check;
 	int		pos_x;
@@ -65,7 +67,6 @@ typedef struct mlx_vars
 }			t_vars;
 
 //	MISC (aka to delete later)
-int			av_print_tab(char **map);
 
 //	MAP UTILS
 char		**sl_gentab(char *map);
@@ -89,11 +90,13 @@ int			sl_win_calc(t_vars *mlx, char t);
 int			sl_pos_calc(t_vars *mlx, char t, char find);
 int			sl_strlen(char *str);
 int			sl_collect_calc(t_vars *mlx, char find);
+int			sl_find_calc(t_vars *mlx, char find);
 
 //	CHECKERS
 int			sl_is_possible(char **map, int y, int x, t_vars *mlx);
 int			sl_check(char **map, int y, int x, char c);
 int			sl_checkmap(int fd, int w, int h);
+int			sl_checktex(t_vars *mlx);
 
 //	FREE / SECURITY
 int			sl_free_stop(t_vars *mlx, int errorcode);

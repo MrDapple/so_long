@@ -6,25 +6,35 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 17:37:57 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 13:48:57 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	av_print_tab(char **map)
+int	sl_checktex(t_vars *mlx)
 {
-	int	w;
-	int	h;
-
-	w = 0;
-	h = 0;
-	while (map[h])
-	{
-		ft_printf("[%d]%s\n", h, map[h]);
-		h++;
-	}
-	return (0);
+	if (!mlx->tex_p_up)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_p_down)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_p_left)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_p_right)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_wall)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_floor)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_trail)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_collectible)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_closed)
+		sl_free_stop(mlx, 1);
+	if (!mlx->tex_open)
+		sl_free_stop(mlx, 1);
+	return (1);
 }
 
 char	*sl_index(char type, t_vars *mlx)
@@ -67,7 +77,7 @@ int	sl_settex(t_vars *mlx)
 			"images/chars/E.xpm", &x, &x);
 	mlx->tex_open = mlx_xpm_file_to_image(mlx->mlx,
 			"images/chars/E_lc.xpm", &x, &x);
-	return (0);
+	return (sl_checktex(mlx));
 }
 
 int	sl_map_render(t_vars *mlx)
@@ -102,15 +112,14 @@ int	main(int argc, char **argv)
 	win_w = 0;
 	win_h = 0;
 	if (argc != 2 || !argv[1])
-		return (ft_printf("error: 0\n"));
-	mlx.found = 0;
-	mlx.mlx = mlx_init();
+		return (ft_printf("error\n"));
 	if (sl_set_vars(&mlx, argv[1]) == 0)
-		return (ft_printf("error: 1\n"));
-	sl_collect_calc(&mlx, 'C');
+		return (ft_printf("error\n"));
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);
-	if (mlx.collect <= 0 || mlx.exit_check != 1)
-		return (ft_printf("error: 2\n"));
+	if (mlx.collect < 1 || mlx.player != 1 || mlx.exit != 1
+		|| mlx.exit_check != 1 || mlx.coll_check < mlx.collect)
+		return (ft_printf("error\n"));
+	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_W, mlx.win_h * X_H,
 			"so_long");
 	sl_settex(&mlx);
@@ -118,5 +127,6 @@ int	main(int argc, char **argv)
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
 	mlx_loop(mlx.mlx);
+	sl_free_stop(&mlx, 0);
 	return (0);
 }

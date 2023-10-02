@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 17:41:43 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 11:47:02 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ char	**sl_gentab(char *map)
 	free(res);
 	close(fd);
 	return (tab);
+}
+
+int	sl_line_len(char *line, char c, char f)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (line[cnt] && line[cnt] != c)
+	{
+		if (line[cnt] != f)
+			return (0);
+		cnt++;
+	}
+	return (cnt);
+}
+
+int	sl_strlen(char *str)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (str[cnt])
+		cnt++;
+	return (cnt);
 }

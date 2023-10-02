@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/09/27 17:38:33 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 13:49:42 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ int	sl_free_stop(t_vars *mlx, int errorcode)
 	int	i;
 
 	i = 0;
-	if (mlx)
-		i = 0;
+	sl_destroy_img(mlx);
+	free(mlx->map);
+	free(mlx->t_map);
+	free(mlx->win);
+	free(mlx->mlx);
 	if (errorcode == 1)
-		ft_printf("error STOP\n");
+		ft_printf("error\n");
 	exit(3);
 	return (0);
 }
@@ -79,12 +82,19 @@ int	sl_set_vars(t_vars *mlx, char *map)
 {
 	mlx->map = sl_gentab(map);
 	if (!mlx->map)
-		return (sl_free_stop(mlx, 1));
+		return (0);
 	mlx->t_map = sl_gentab(map);
 	if (!mlx->t_map)
-		return (sl_free_stop(mlx, 1));
+		return (0);
 	mlx->win_w = sl_win_calc(mlx, 'w');
 	mlx->win_h = sl_win_calc(mlx, 'h');
+	sl_collect_calc(mlx, 'C');
+	mlx->player = 0;
+	sl_find_calc(mlx, 'P');
+	mlx->exit = 0;
+	sl_find_calc(mlx, 'E');
+	if (mlx->exit == 0 || mlx->player == 0 || mlx->collect < 1)
+		return (0);
 	mlx->pos_x = sl_pos_calc(mlx, 'x', 'P');
 	mlx->pos_y = sl_pos_calc(mlx, 'y', 'P');
 	mlx->pos_x_e = sl_pos_calc(mlx, 'x', 'E');
