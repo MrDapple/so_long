@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 13:49:42 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:04:10 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	sl_is_possible(char **map, int y, int x, t_vars *mlx)
 	else if (map[y][x] == 'C')
 		mlx->coll_check++;
 	else if (map[y][x] == 'E')
-	{
 		mlx->exit_check = 1;
-		return (1);
-	}
 	map[y][x] = '1';
 	sl_is_possible(map, y - 1, x, mlx);
 	sl_is_possible(map, y, x - 1, mlx);

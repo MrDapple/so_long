@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 12:40:06 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:03:36 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,19 @@ int	mv_up(t_vars *mlx)
 		{
 			if (mlx->found >= mlx->collect)
 				sl_free_stop(mlx, 0);
-			else
-				return (0);
+			mlx->map[mlx->pos_y - 1][mlx->pos_x] = 'E';
 		}
 		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'C')
 		{
 			mlx->map[mlx->pos_y - 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
-			(mlx->pos_x) * X_W, (mlx->pos_y--) * X_H);
+		if (mlx->map[mlx->pos_y][mlx->pos_x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_closed,
+				(mlx->pos_x) * X_W, (mlx->pos_y--) * X_H);
+		else
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
+				(mlx->pos_x) * X_W, (mlx->pos_y--) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_up,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
@@ -71,16 +74,19 @@ int	mv_down(t_vars *mlx)
 		{
 			if (mlx->found >= mlx->collect)
 				sl_free_stop(mlx, 0);
-			else
-				return (0);
+			mlx->map[mlx->pos_y + 1][mlx->pos_x] = 'E';
 		}
 		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'C')
 		{
 			mlx->map[mlx->pos_y + 1][mlx->pos_x] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
-			(mlx->pos_x) * X_W, (mlx->pos_y++) * X_H);
+		if (mlx->map[mlx->pos_y][mlx->pos_x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_closed,
+				(mlx->pos_x) * X_W, (mlx->pos_y++) * X_H);
+		else
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
+				(mlx->pos_x) * X_W, (mlx->pos_y++) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_down,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
@@ -96,16 +102,19 @@ int	mv_left(t_vars *mlx)
 		{
 			if (mlx->found >= mlx->collect)
 				sl_free_stop(mlx, 0);
-			else
-				return (0);
+			mlx->map[mlx->pos_y][mlx->pos_x - 1] = 'E';
 		}
 		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'C')
 		{
 			mlx->map[mlx->pos_y][mlx->pos_x - 1] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
-			(mlx->pos_x--) * X_W, (mlx->pos_y) * X_H);
+		if (mlx->map[mlx->pos_y][mlx->pos_x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_closed,
+				(mlx->pos_x--) * X_W, (mlx->pos_y) * X_H);
+		else
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
+				(mlx->pos_x--) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_left,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
@@ -121,16 +130,19 @@ int	mv_right(t_vars *mlx)
 		{
 			if (mlx->found >= mlx->collect)
 				sl_free_stop(mlx, 0);
-			else
-				return (0);
+			mlx->map[mlx->pos_y][mlx->pos_x + 1] = 'E';
 		}
 		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'C')
 		{
 			mlx->map[mlx->pos_y][mlx->pos_x + 1] = '0';
 			mlx->found++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
-			(mlx->pos_x++) * X_W, (mlx->pos_y) * X_H);
+		if (mlx->map[mlx->pos_y][mlx->pos_x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_closed,
+				(mlx->pos_x++) * X_W, (mlx->pos_y) * X_H);
+		else
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_trail,
+				(mlx->pos_x++) * X_W, (mlx->pos_y) * X_H);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_p_right,
 			(mlx->pos_x) * X_W, (mlx->pos_y) * X_H);
 		return (1);
