@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:32:16 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 12:31:38 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:38:50 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,21 @@ int	sl_pos_calc(t_vars *mlx, char t, char find)
 
 	c1 = 0;
 	c2 = 0;
-	while (c1 <= mlx->win_h)
+	while (mlx->map[c1])
 	{
-		if (mlx->map[c1][c2] == find && mlx->map[c1][c2] != '\0')
+		while (mlx->map[c1][c2])
 		{
-			if (t == 'x')
-				return (c2);
-			if (t == 'y')
-				return (c1);
-		}
-		if (c2 == mlx->win_w)
-		{
-			c1++;
-			c2 = 0;
-		}
-		else
+			if (mlx->map[c1][c2] == find)
+			{
+				if (t == 'x')
+					return (c2);
+				if (t == 'y')
+					return (c1);
+			}
 			c2++;
+		}
+		c2 = 0;
+		c1++;
 	}
 	return (0);
 }

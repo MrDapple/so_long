@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 16:26:49 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:34:59 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	sl_check_tb(char **map, int x)
 	c1 = 0;
 	c2 = 0;
 	c3 = 0;
+	if (x <= 0)
+		return (0);
 	while (map[c1][c2] == '1')
 		c2++;
 	if (c2 != x)
@@ -113,6 +115,8 @@ int	sl_strlen(char *str)
 	int	cnt;
 
 	cnt = 0;
+	if (!str)
+		return (0);
 	while (str[cnt])
 		cnt++;
 	return (cnt);
