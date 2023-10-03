@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/02 16:08:17 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/03 09:29:36 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ typedef struct mlx_vars
 	int		win_h;
 	void	*tex_wall;
 	void	*tex_floor;
-	void	*tex_temp;
 	void	*tex_p_up;
 	void	*tex_p_down;
 	void	*tex_p_left;
 	void	*tex_p_right;
-	void	*tex_ghost_n;
 	void	*tex_collectible;
 	void	*tex_closed;
 	void	*tex_open;
@@ -102,5 +100,6 @@ int			sl_check_val(char check, char *lst);
 //	FREE / SECURITY
 int			sl_free_stop(t_vars *mlx, int errorcode);
 int			sl_destroy_img(t_vars *mlx);
+void		sl_free_tab(char **tab);
 
 #endif
