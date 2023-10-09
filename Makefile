@@ -3,14 +3,16 @@ OBJCS		:=	SL_utils.o \
 				SL_gentab.o \
 				SL_movement.o \
 				SL_calc.o \
+				SL_display_info.o \
+				SL_display_info_utils.o \
 
-LIBPRINT	:= libftprintf/libftprintf.a
+LIBPRINT	:=	libftprintf.a
 
 NAME		:=	so_long
 CFLAGS		?=	-Wall -Wextra -Werror
 SFLAGS		:=	-framework OpenGL -framework AppKit
 
-all			:	libft $(NAME)
+all			:	$(NAME)
 
 $(NAME)		:	$(OBJCS)
 	$(CC) $(OBJCS) $(LIBPRINT) -lmlx $(CFLAGS) $(SFLAGS) -o $(NAME)
@@ -18,16 +20,13 @@ $(NAME)		:	$(OBJCS)
 %.o			:	%.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
-libft		:
-	make -C libftprintf
 
 clean		:
 	rm -f $(OBJCS)
 
 fclean		:	clean
-	make fclean -C libftprintf
-	rm -f $(LIBPRINT) $(NAME)
+	rm -f $(NAME)
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re libft
+.PHONY		:	all clean fclean re

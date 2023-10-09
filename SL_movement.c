@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/03 09:07:51 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/09 13:03:21 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	sl_movement(int keycode, t_vars *mlx)
 
 	c = steps;
 	if (keycode == 53)
-	{
 		sl_free_stop(mlx, 4);
-	}
 	else if (keycode == 126)
 		steps += mv_up(mlx);
 	else if (keycode == 125)
@@ -30,11 +28,14 @@ int	sl_movement(int keycode, t_vars *mlx)
 		steps += mv_left(mlx);
 	else if (keycode == 124)
 		steps += mv_right(mlx);
-	if (steps > c)
-		ft_printf("Steps: %d\n", steps);
 	if (mlx->found >= mlx->collect)
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->tex_open,
 			(mlx->pos_x_e) * X_W, (mlx->pos_y_e) * X_H);
+	if (steps > c)
+	{
+		if (sl_display_info(mlx, steps) != 1)
+			sl_free_stop(mlx, 3);
+	}
 	return (0);
 }
 

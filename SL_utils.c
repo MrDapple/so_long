@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/03 09:25:46 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/09 13:10:19 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,7 @@ int	sl_map_render(t_vars *mlx)
 int	main(int argc, char **argv)
 {
 	t_vars	mlx;
-	int		win_w;
-	int		win_h;
 
-	win_w = 0;
-	win_h = 0;
 	if (argc != 2 || !argv[1])
 		return (ft_printf("error\n"));
 	sl_set_vars(&mlx, argv[1]);
@@ -112,6 +108,8 @@ int	main(int argc, char **argv)
 	mlx.win = mlx_new_window(mlx.mlx, mlx.win_w * X_W, mlx.win_h * X_H,
 			"so_long");
 	sl_map_render(&mlx);
+	if (sl_display_info(&mlx, 0) != 1)
+		sl_free_stop(&mlx, 3);
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
 	mlx_loop(mlx.mlx);

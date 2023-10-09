@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/03 09:29:36 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/09 14:21:32 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define LIMIT 50
 
 //	INCLUDES
-# include "libftprintf/ft_printf.h"
-# include "libftprintf/get_next_line.h"
+// # include "libftprintf.a"
+# include "ft_printf.h"
+# include "get_next_line.h"
+# include "libft.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
@@ -50,6 +52,7 @@ typedef struct mlx_vars
 	void	*tex_closed;
 	void	*tex_open;
 	void	*tex_trail;
+	void	*tex_back;
 	char	**map;
 	char	**t_map;
 	int		found;
@@ -69,6 +72,17 @@ typedef struct mlx_vars
 //	MAP UTILS
 char		**sl_gentab(char *map);
 int			sl_map_render(t_vars *mlx);
+
+//	DISPLAY UTILS
+int			sl_display_info(t_vars *mlx, int steps);
+char		*sl_strgen_steps(int steps);
+char		*sl_strgen_collect(int found, int collect);
+char		*sl_collect_gen(char *ret, int collect);
+void		*sl_img_back(t_vars *mlx);
+char		*sl_strgen_free(char *temp, char *ret);
+void		sl_display_succes(void *mlx, void *win, char *str);
+int			sl_display_freestop(t_vars *mlx, char *str1, char *str2,
+				void *back);
 
 //	SET VARIABLES / INDEX
 int			sl_settex(t_vars *mlx);
