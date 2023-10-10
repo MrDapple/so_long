@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 13:10:19 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:37:17 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	mlx;
 
-	if (argc != 2 || !argv[1])
+	if (argc != 2 || (sl_check_input(argv[1], ".ber") == 0))
 		return (ft_printf("error\n"));
 	sl_set_vars(&mlx, argv[1]);
 	sl_is_possible(mlx.t_map, mlx.pos_y, mlx.pos_x, &mlx);

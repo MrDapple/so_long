@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/03 11:34:59 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:40:36 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	sl_checkmap(char **map)
 
 	c1 = 0;
 	c2 = -1;
-	x = sl_strlen(map[c1]);
+	x = ft_strlen(map[c1]);
 	if (sl_check_tb(map, x) == 0)
 		return (0);
 	c2 = 0;
-	while (map[++c1])
+	while (map[++c1 + 1])
 	{
 		if (map[c1][c2] != '1')
 			return (0);
@@ -65,22 +65,34 @@ char	**sl_gentab(char *map)
 
 	total = 0;
 	fd = open(map, O_RDONLY);
-	while (read(fd, &buff, 1))
+	while (fd != -1 && read(fd, &buff, 1))
 		total++;
 	close(fd);
 	res = malloc(sizeof(char) * (total + 1));
-	if (!res)
+	if (sl_rip(res, total, fd) == 0)
 		return (0);
 	res[total] = '\0';
 	fd = open(map, O_RDONLY);
-	read(fd, res, total);
+	if (fd < 0 || read(fd, res, total) < 0)
+		return (0);
 	tab = ft_split(res, '\n');
 	free(res);
 	close(fd);
-	if (sl_checkmap(tab) == 1)
+	if (tab && sl_checkmap(tab) == 1)
 		return (tab);
 	free(tab);
 	return (0);
+}
+
+int	sl_rip(char *res, int total, int fd)
+{
+	if (!res || total <= 0)
+	{
+		free(res);
+		close(fd);
+		return (0);
+	}
+	return (1);
 }
 
 int	sl_check_tb(char **map, int x)
@@ -108,16 +120,4 @@ int	sl_check_tb(char **map, int x)
 	if (c2 != x)
 		return (0);
 	return (1);
-}
-
-int	sl_strlen(char *str)
-{
-	int	cnt;
-
-	cnt = 0;
-	if (!str)
-		return (0);
-	while (str[cnt])
-		cnt++;
-	return (cnt);
 }

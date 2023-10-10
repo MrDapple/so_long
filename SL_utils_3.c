@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   SL_utils_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 12:27:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 15:31:35 by anvoets          ###   ########.fr       */
+/*   Created: 2023/10/10 12:18:43 by anvoets           #+#    #+#             */
+/*   Updated: 2023/10/10 12:36:27 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-size_t	ft_strlen(const char *str)
+int	sl_check_input(char *in, char *com)
 {
-	size_t	cnt;
+	int	c;
+	int	i;
 
-	cnt = 0;
-	if (!str)
-		return (0);
-	while (str[cnt] != '\0')
+	c = 0;
+	i = 0;
+	while (in[c])
 	{
-		cnt++;
+		while (in[c] == com[++i])
+		{
+			if (!in[c])
+				return (1);
+			c++;
+		}
+		i = 0;
+		if (in[c])
+			c++;
 	}
-	return (cnt);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 14:21:32 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:34:17 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct mlx_vars
 //	MAP UTILS
 char		**sl_gentab(char *map);
 int			sl_map_render(t_vars *mlx);
+int			sl_rip(char *res, int total, int fd);
 
 //	DISPLAY UTILS
 int			sl_display_info(t_vars *mlx, int steps);
@@ -99,7 +100,6 @@ int			mv_right(t_vars *mlx);
 //	CALCULATIONS
 int			sl_win_calc(t_vars *mlx, char t);
 int			sl_pos_calc(t_vars *mlx, char t, char find);
-int			sl_strlen(char *str);
 int			sl_collect_calc(t_vars *mlx, char find);
 int			sl_find_calc(t_vars *mlx, char find);
 
@@ -110,6 +110,7 @@ int			sl_checkmap(char **map);
 int			sl_checktex(t_vars *mlx);
 int			sl_check_tb(char **map, int x);
 int			sl_check_val(char check, char *lst);
+int			sl_check_input(char *in, char *com);
 
 //	FREE / SECURITY
 int			sl_free_stop(t_vars *mlx, int errorcode);

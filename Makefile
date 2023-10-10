@@ -1,5 +1,6 @@
 OBJCS		:=	SL_utils.o \
 				SL_utils_2.o \
+				SL_utils_3.o \
 				SL_gentab.o \
 				SL_movement.o \
 				SL_calc.o \
