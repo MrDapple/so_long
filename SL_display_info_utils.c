@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:44:34 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 13:08:25 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:49:01 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*sl_img_back(t_vars *mlx)
 	void	*back;
 	int		x;
 
-	if (!mlx)
-		ft_printf("kek\n");
 	back = mlx_xpm_file_to_image(mlx->mlx, "images/backscore.xpm", &x, &x);
 	return (back);
 }

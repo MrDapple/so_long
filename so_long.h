@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/10 12:34:17 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:09:59 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@
 # define LIMIT 50
 
 //	INCLUDES
-// # include "libftprintf.a"
-# include "ft_printf.h"
-# include "get_next_line.h"
-# include "libft.h"
+# include "libft/libft.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
-
-// free map and t_map and ... (because they're malloc'd)
-// destroy all image textures (act as image free)
 
 //	MLX DATA STRUCTURE
 typedef struct mlx_vars
@@ -66,8 +60,6 @@ typedef struct mlx_vars
 	int		pos_x_e;
 	int		pos_y_e;
 }			t_vars;
-
-//	MISC (aka to delete later)
 
 //	MAP UTILS
 char		**sl_gentab(char *map);
@@ -116,5 +108,6 @@ int			sl_check_input(char *in, char *com);
 int			sl_free_stop(t_vars *mlx, int errorcode);
 int			sl_destroy_img(t_vars *mlx);
 void		sl_free_tab(char **tab);
+int			sl_end_x(t_vars *mlx);
 
 #endif

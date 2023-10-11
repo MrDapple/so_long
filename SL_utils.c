@@ -6,37 +6,11 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:13 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/10 12:37:17 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 14:59:22 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	sl_free_stop(t_vars *mlx, int errorcode)
-{
-	int	i;
-
-	i = 0;
-	if (errorcode == 4)
-	{
-		sl_destroy_img(mlx);
-		sl_free_tab(mlx->map);
-		sl_free_tab(mlx->t_map);
-		exit(3);
-		return (0);
-	}
-	if (errorcode >= 3)
-		sl_destroy_img(mlx);
-	if (errorcode >= 2)
-	{
-		sl_free_tab(mlx->map);
-		sl_free_tab(mlx->t_map);
-	}
-	if (errorcode >= 1)
-		ft_printf("error\n");
-	exit(3);
-	return (0);
-}
 
 void	sl_free_tab(char **tab)
 {
@@ -112,6 +86,7 @@ int	main(int argc, char **argv)
 		sl_free_stop(&mlx, 3);
 	mlx.map[mlx.pos_y][mlx.pos_x] = '0';
 	mlx_key_hook(mlx.win, sl_movement, &mlx);
+	mlx_hook(mlx.win, 17, 0, sl_end_x, &mlx);
 	mlx_loop(mlx.mlx);
 	sl_free_stop(&mlx, 4);
 	return (0);

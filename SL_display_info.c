@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:12:55 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 13:10:58 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/10 15:11:24 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ char	*sl_strgen_steps(int steps)
 
 	i = steps;
 	ret = " STEPS:   [";
+	if (!ret)
+		return (0);
 	temp = ft_itoa(steps);
-	if (!temp && i)
-		return (NULL);
+	if (!temp)
+		return (sl_strgen_free(temp, ret));
 	ret = ft_strjoin(ret, temp);
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
@@ -66,9 +68,11 @@ char	*sl_strgen_collect(int found, int collect)
 	char	*temp;
 
 	ret = " COLLECT: [";
+	if (!ret)
+		return (0);
 	temp = ft_itoa(found);
 	if (!temp)
-		return (0);
+		return (sl_strgen_free(temp, ret));
 	ret = ft_strjoin(ret, temp);
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
@@ -105,5 +109,5 @@ char	*sl_strgen_free(char *temp, char *ret)
 		free(temp);
 	if (ret)
 		free(ret);
-	return (NULL);
+	return (0);
 }
