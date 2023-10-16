@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:26:14 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/10 12:40:36 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/16 12:34:07 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**sl_gentab(char *map)
 	close(fd);
 	if (tab && sl_checkmap(tab) == 1)
 		return (tab);
-	free(tab);
+	sl_free_tab(tab);
 	return (0);
 }
 

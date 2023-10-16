@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:47:07 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/11 12:09:59 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:25:27 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 //	SIZE MULTIPLIERS
 # define X_W 100
 # define X_H 100
-# define LIMIT 50
 
 //	INCLUDES
 # include "libft/libft.h"
@@ -70,7 +69,7 @@ int			sl_rip(char *res, int total, int fd);
 int			sl_display_info(t_vars *mlx, int steps);
 char		*sl_strgen_steps(int steps);
 char		*sl_strgen_collect(int found, int collect);
-char		*sl_collect_gen(char *ret, int collect);
+char		*sl_collect_gen(int collect);
 void		*sl_img_back(t_vars *mlx);
 char		*sl_strgen_free(char *temp, char *ret);
 void		sl_display_succes(void *mlx, void *win, char *str);
@@ -107,7 +106,7 @@ int			sl_check_input(char *in, char *com);
 //	FREE / SECURITY
 int			sl_free_stop(t_vars *mlx, int errorcode);
 int			sl_destroy_img(t_vars *mlx);
-void		sl_free_tab(char **tab);
+int			sl_free_tab(char **tab);
 int			sl_end_x(t_vars *mlx);
 
 #endif

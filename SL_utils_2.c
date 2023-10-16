@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:24:44 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 14:41:46 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:34:44 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,13 @@ int	sl_destroy_img(t_vars *mlx)
 
 int	sl_set_vars(t_vars *mlx, char *map)
 {
+	mlx->win = NULL;
 	mlx->map = sl_gentab(map);
 	if (!mlx->map)
-		return (sl_free_stop(mlx, 1));
+		return (0);
 	mlx->t_map = sl_gentab(map);
 	if (!mlx->t_map)
-		return (sl_free_stop(mlx, 1));
+		return (0);
 	mlx->win_w = sl_win_calc(mlx, 'w');
 	mlx->win_h = sl_win_calc(mlx, 'h');
 	sl_collect_calc(mlx, 'C');

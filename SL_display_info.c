@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:12:55 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/10 15:11:24 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:36:59 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	sl_display_info(t_vars *mlx, int steps)
 
 	str_step = sl_strgen_steps(steps);
 	if (!str_step)
-		return (sl_free_stop(mlx, 3));
+		return (sl_free_stop(mlx, 5));
 	str_coll = sl_strgen_collect(mlx->found, mlx->collect);
 	if (!str_coll)
-		return (sl_free_stop(mlx, 3));
+		return (sl_free_stop(mlx, 5));
 	back = sl_img_back(mlx);
 	if (!back)
 		return (sl_display_freestop(mlx, str_step, str_coll, back));
@@ -43,19 +43,18 @@ char	*sl_strgen_steps(int steps)
 {
 	char	*ret;
 	char	*temp;
-	int		i;
+	char	*nr;
 
-	i = steps;
-	ret = " STEPS:   [";
-	if (!ret)
+	temp = " STEPS:   [";
+	nr = ft_itoa(steps);
+	if (!nr)
 		return (0);
-	temp = ft_itoa(steps);
-	if (!temp)
-		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, temp);
+	ret = ft_strjoin(temp, nr);
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, "]");
+	free(nr);
+	temp = ret;
+	ret = ft_strjoin(temp, "]");
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
 	free(temp);
@@ -66,39 +65,48 @@ char	*sl_strgen_collect(int found, int collect)
 {
 	char	*ret;
 	char	*temp;
+	char	*huh;
+	char	*nr;
 
-	ret = " COLLECT: [";
-	if (!ret)
+	temp = " COLLECT: [";
+	huh = sl_collect_gen(collect);
+	if (!huh)
 		return (0);
-	temp = ft_itoa(found);
-	if (!temp)
-		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, temp);
+	nr = ft_itoa(found);
+	if (!nr)
+		return (0);
+	ret = ft_strjoin(temp, nr);
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
-	ret = sl_collect_gen(ret, collect);
+	free(nr);
+	temp = ret;
+	ret = ft_strjoin(temp, huh);
 	if (!ret)
 		return (sl_strgen_free(temp, ret));
+	free(huh);
 	free(temp);
 	return (ret);
 }
 
-char	*sl_collect_gen(char *ret, int collect)
+char	*sl_collect_gen(int collect)
 {
+	char	*ret;
 	char	*temp;
+	char	*nr;
 
-	temp = ft_itoa(collect);
-	if (!temp)
-		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, "/");
+	ret = "/";
+	nr = ft_itoa(collect);
+	if (!nr)
+		return (0);
+	temp = ret;
+	ret = ft_strjoin(temp, nr);
 	if (!ret)
-		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, temp);
+		return (0);
+	free(nr);
+	temp = ret;
+	ret = ft_strjoin(temp, "]");
 	if (!ret)
-		return (sl_strgen_free(temp, ret));
-	ret = ft_strjoin(ret, "]");
-	if (!ret)
-		return (sl_strgen_free(temp, ret));
+		return (0);
 	free(temp);
 	return (ret);
 }

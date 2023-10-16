@@ -7,7 +7,7 @@ OBJCS		:=	SL_utils.o \
 				SL_display_info.o \
 				SL_display_info_utils.o \
 
-LIBFT	:=	libft/libft.a
+LIBFT		:=	libft/libft.a
 
 NAME		:=	so_long
 CFLAGS		?=	-Wall -Wextra -Werror
@@ -15,12 +15,11 @@ SFLAGS		:=	-framework OpenGL -framework AppKit
 
 all			:	$(NAME)
 
-$(NAME)		:	$(OBJCS)
+$(NAME)		:	$(OBJCS) so_long.h
 	$(CC) $(OBJCS) $(LIBFT) -lmlx $(CFLAGS) $(SFLAGS) -o $(NAME)
 
 %.o			:	%.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
-
 
 clean		:
 	rm -f $(OBJCS)

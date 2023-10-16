@@ -6,7 +6,7 @@
 /*   By: anvoets <anvoets@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:30:19 by anvoets           #+#    #+#             */
-/*   Updated: 2023/10/09 13:03:21 by anvoets          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:14:50 by anvoets          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	sl_movement(int keycode, t_vars *mlx)
 
 	c = steps;
 	if (keycode == 53)
-		sl_free_stop(mlx, 4);
+		sl_free_stop(mlx, 10);
 	else if (keycode == 126)
 		steps += mv_up(mlx);
 	else if (keycode == 125)
@@ -34,7 +34,7 @@ int	sl_movement(int keycode, t_vars *mlx)
 	if (steps > c)
 	{
 		if (sl_display_info(mlx, steps) != 1)
-			sl_free_stop(mlx, 3);
+			sl_free_stop(mlx, 5);
 	}
 	return (0);
 }
@@ -46,7 +46,7 @@ int	mv_up(t_vars *mlx)
 		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				sl_free_stop(mlx, 0);
+				sl_free_stop(mlx, 10);
 			mlx->map[mlx->pos_y - 1][mlx->pos_x] = 'E';
 		}
 		if (mlx->map[mlx->pos_y - 1][mlx->pos_x] == 'C')
@@ -74,7 +74,7 @@ int	mv_down(t_vars *mlx)
 		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				sl_free_stop(mlx, 0);
+				sl_free_stop(mlx, 10);
 			mlx->map[mlx->pos_y + 1][mlx->pos_x] = 'E';
 		}
 		if (mlx->map[mlx->pos_y + 1][mlx->pos_x] == 'C')
@@ -102,7 +102,7 @@ int	mv_left(t_vars *mlx)
 		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				sl_free_stop(mlx, 0);
+				sl_free_stop(mlx, 10);
 			mlx->map[mlx->pos_y][mlx->pos_x - 1] = 'E';
 		}
 		if (mlx->map[mlx->pos_y][mlx->pos_x - 1] == 'C')
@@ -130,7 +130,7 @@ int	mv_right(t_vars *mlx)
 		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'E')
 		{
 			if (mlx->found >= mlx->collect)
-				sl_free_stop(mlx, 0);
+				sl_free_stop(mlx, 10);
 			mlx->map[mlx->pos_y][mlx->pos_x + 1] = 'E';
 		}
 		if (mlx->map[mlx->pos_y][mlx->pos_x + 1] == 'C')
